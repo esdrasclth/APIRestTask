@@ -6,7 +6,21 @@ export const findAllTasks = async (req, res) => {
 }
 
 export const createTask = async (req, res) => {
-    const newTask = new Task({title: req.body.title, description: req.body.description});
+    const newTask = new Task({
+        title: req.body.title, 
+        description: req.body.description,
+        done: req.body.done ? req.body.done : false 
+    });
     const taskSave = await newTask.save();
     res.json(taskSave)
+}
+
+export const findOneTask = async (req, res) => {
+    const task = await Task.findById(req.params.id)
+    res.json(task)
+}
+
+export const deleteTask = async (req, res) => {
+    const data = await Task.findByIdAndDelete(req.params.id);
+    res.json({message: "Task were deleted successfully"});
 }

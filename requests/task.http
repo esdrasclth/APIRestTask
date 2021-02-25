@@ -2,10 +2,17 @@
 GET http://localhost:3000/api/tasks
 
 ###
+GET http://localhost:3000/api/tasks/603803f5966f9a2e045459fd
+
+###
 POST http://localhost:3000/api/tasks
 Content-Type: application/json
 
 {
-    "title": "aprender javascript a full",
-    "description": "forma de crear aplicaciones web modernas"
+    "title": "Crear Laravel application",
+    "description": "Usando operador ternario para avlidacion",
+    "done": true
 }
+
+###
+DELETE  http://localhost:3000/api/tasks/60382ed34b4f593084507fc9
