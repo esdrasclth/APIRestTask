@@ -5,6 +5,9 @@ GET http://localhost:3000/api/tasks
 GET http://localhost:3000/api/tasks/603803f5966f9a2e045459fd
 
 ###
+GET http://localhost:3000/api/tasks/done
+
+###
 POST http://localhost:3000/api/tasks
 Content-Type: application/json
 
@@ -16,3 +19,12 @@ Content-Type: application/json
 
 ###
 DELETE  http://localhost:3000/api/tasks/60382ed34b4f593084507fc9
+
+###
+PUT http://localhost:3000/api/60380119bd922f12dcfbb7a2
+Content-Type: application/json
+
+{
+    "title": "Aprende a programar en MERN",
+    "description": "forma de crear nuevas aplicaciones"
+}
