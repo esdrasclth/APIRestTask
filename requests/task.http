@@ -6,6 +6,6 @@ POST http://localhost:3000/api/tasks
 Content-Type: application/json
 
 {
-    "title": "aprender a programar",
-    "description": "forma de crear nuevas aplicaciones"
+    "title": "aprender javascript a full",
+    "description": "forma de crear aplicaciones web modernas"
 }
