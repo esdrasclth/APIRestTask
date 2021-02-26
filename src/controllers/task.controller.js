@@ -1,36 +1,65 @@
 import Task from '../models/Task'
 
 export const findAllTasks = async (req, res) => {
-    const tasks = await Task.find()
-    res.json(tasks)
+    try {
+        const tasks = await Task.find()
+        res.json(tasks)
+    } catch (error) {
+        res.status(500).json({
+            message: error.message || 'something goes wrong retrieving the tasks'
+        })
+    }
 }
 
 export const createTask = async (req, res) => {
-    const newTask = new Task({
-        title: req.body.title, 
-        description: req.body.description,
-        done: req.body.done ? req.body.done : false 
-    });
-    const taskSave = await newTask.save();
-    res.json(taskSave)
+
+    if (!req.body.title) {
+        return res.status(400).send({ message: 'content cannot be empty' });
+    }
+
+    try {
+        const newTask = new Task({
+            title: req.body.title,
+            description: req.body.description,
+            done: req.body.done ? req.body.done : false
+        });
+        const taskSave = await newTask.save();
+        res.json(taskSave)
+    } catch (error) {
+        res.status(500).json({
+            message: error.message || 'something goes wrong creating a task'
+        })
+    }
+
 }
 
 export const findOneTask = async (req, res) => {
-    const task = await Task.findById(req.params.id)
-    res.json(task)
+    const { id } = req.params;
+
+    try {
+        const task = await Task.findById(id)
+
+        if (!task) return res.status(400).json({ message: 'Task with id ' + id + ' does not exists' })
+
+        res.json(task)
+    } catch (error) {
+        res.status(500).json({
+            message: error.message || 'error retrieving task with id: ' + id
+        })
+    }
 }
 
 export const deleteTask = async (req, res) => {
     const data = await Task.findByIdAndDelete(req.params.id);
-    res.json({message: "Task were deleted successfully"});
+    res.json({ message: "Task were deleted successfully" });
 }
 
 export const findAllDoneTasks = async (req, res) => {
-    const tasks = await Task.find({done: true})
+    const tasks = await Task.find({ done: true })
     res.json(tasks)
 }
 
-export const updateTask =  async (req, res) => {
+export const updateTask = async (req, res) => {
     const updatedTask = await Task.findByIdAndUpdate(req.params.id, req.body);
-    res.json({message: "Task was update successfully"});
+    res.json({ message: "Task was update successfully" });
 }

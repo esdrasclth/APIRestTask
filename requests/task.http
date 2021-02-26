@@ -2,7 +2,7 @@
 GET http://localhost:3000/api/tasks
 
 ###
-GET http://localhost:3000/api/tasks/603803f5966f9a2e045459fd
+GET http://localhost:3000/api/tasks/localhost:3000/api/tasks/603803f5966f9a2e045459fd
 
 ###
 GET http://localhost:3000/api/tasks/done
@@ -21,7 +21,7 @@ Content-Type: application/json
 DELETE  http://localhost:3000/api/tasks/60382ed34b4f593084507fc9
 
 ###
-PUT http://localhost:3000/api/60380119bd922f12dcfbb7a2
+PUT http://localhost:3000/api/tasks/60380119bd922f12dcfbb7a2
 Content-Type: application/json
 
 {

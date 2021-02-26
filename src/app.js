@@ -1,16 +1,23 @@
 import express from 'express'
+import morgan from 'morgan'
+import cors from 'cors'
+
 import TasksRoutes from './routes/tasks.routes'
 
 const app = express()
 
-app.use(express.json());
-
-// Setings
+// setings
 app.set('port', process.env.PORT || 3000);
 
-// Routes
-app.get('/',  (req, res) => {
-    res.json({message: 'Welcome to my application'})
+//middlewares
+app.use(cors());
+app.use(morgan('dev'));
+app.use(express.json());
+app.use(express.urlencoded({extended: false}));
+
+// routes
+app.get('/', (req, res) => {
+    res.json({ message: 'Welcome to my application' })
 })
 
 app.use('/api/tasks', TasksRoutes)
