@@ -2,7 +2,8 @@ import Task from '../models/Task'
 
 export const findAllTasks = async (req, res) => {
     try {
-        const tasks = await Task.find()
+        
+        const tasks = await Task.paginate({}, {offset: , limit})
         res.json(tasks)
     } catch (error) {
         res.status(500).json({
@@ -50,8 +51,17 @@ export const findOneTask = async (req, res) => {
 }
 
 export const deleteTask = async (req, res) => {
-    const data = await Task.findByIdAndDelete(req.params.id);
-    res.json({ message: "Task were deleted successfully" });
+    const { id } = req.params;
+
+    try {
+        const data = await Task.findByIdAndDelete(id);
+        res.json({ message: "Task were deleted successfully" });
+    } catch (error) {
+        es.status(500).json({
+            message: 'cannot delete task with id: ' + id
+        })
+    }
+    
 }
 
 export const findAllDoneTasks = async (req, res) => {
